@@ -1,0 +1,5 @@
+<!-- insert_bottom "[data-hook='product_show'], #product_show[data-hook]" -->
+
+<div class="product-cross-sells" data-hook="product-cross-sells">
+    <%= render :partial => "spree/shared/cross_sells_by_product" %>
+</div>

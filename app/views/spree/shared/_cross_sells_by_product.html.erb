@@ -1,0 +1,48 @@
+<% if @product.has_related_products?('cross_sells') %>
+    <div>
+      <div class="col-lg-12 col-sm-12">
+        <h3 class="title"><%= Spree.t('cross_sells') %></h3>
+      </div>
+      <div class="col-lg-12 col-sm-12 hero-feature">
+        <div class="well">
+          <div id="myCarousel" class="carousel slide">
+
+            <!-- Carousel items -->
+            <div class="carousel-inner">
+              <% @product.cross_sells.in_groups_of(3).each_with_index do |products, index| %>
+                  <div class="item <%= index == 0 ? 'active' : '' %>">
+                    <div class="row">
+                      <% products.compact.each do |product| %>
+                          <div class="col-md-4 col-sm-4 col-xs-12"><%= link_to product_image(product, class: "img-responsive"), product %></div>
+                      <% end %>
+                    </div>
+                  </div>
+              <% end %>
+            </div>
+            <%# Controls %>
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              <span class="sr-only"><%= t(:previous) %></span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              <span class="sr-only"><%= t(:next) %></span>
+            </a>
+          </div>
+          <!--/myCarousel-->
+        </div>
+        <!--/well-->
+      </div>
+    </div>
+<% end %>
+
+
+<% content_for :body_scripts do %>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#myCarousel').carousel({
+                interval: 10000
+            })
+        });
+    </script>
+<% end %>
